@@ -1,7 +1,33 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Mail, Instagram, ArrowRight, BookOpen, Briefcase, Award, Code, ChevronDown } from 'lucide-react';
+import { Mail, Instagram, ArrowRight, BookOpen, Briefcase, Award, Code, ChevronDown, Download, X } from 'lucide-react';
 import './App.css';
+
+// Device detection hook
+const useDeviceDetect = () => {
+  const [deviceInfo, setDeviceInfo] = useState({
+    isMobile: false,
+    isTablet: false,
+    isDesktop: false
+  });
+
+  useEffect(() => {
+    const checkDevice = () => {
+      const width = window.innerWidth;
+      setDeviceInfo({
+        isMobile: width <= 768,
+        isTablet: width > 768 && width <= 1024,
+        isDesktop: width > 1024
+      });
+    };
+
+    checkDevice();
+    window.addEventListener('resize', checkDevice);
+    return () => window.removeEventListener('resize', checkDevice);
+  }, []);
+
+  return deviceInfo;
+};
 
 // Content Data
 const SKILLS = ['HTML', 'Java', 'Python', 'Cyber Security'];
@@ -44,6 +70,35 @@ function App() {
   const { scrollYProgress } = useScroll();
   const opacity = useTransform(scrollYProgress, [0, 0.05], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.1], [1, 0.95]);
+  const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
+  const { isMobile, isTablet, isDesktop } = useDeviceDetect();
+
+  const handleResumeClick = () => {
+    setIsResumeModalOpen(true);
+    
+    // Request fullscreen based on device type
+    if (isDesktop) {
+      // For desktop, we'll use the modal which already feels like fullscreen
+      setTimeout(() => {
+        const modal = document.querySelector('.resume-modal-content');
+        if (modal && modal.requestFullscreen) {
+          modal.requestFullscreen().catch(err => {
+            console.log('Fullscreen not supported or denied:', err);
+          });
+        }
+      }, 100);
+    } else if (isMobile || isTablet) {
+      // For mobile/tablet, use device's native fullscreen
+      setTimeout(() => {
+        const modal = document.querySelector('.resume-modal-overlay');
+        if (modal && modal.requestFullscreen) {
+          modal.requestFullscreen().catch(err => {
+            console.log('Fullscreen not supported or denied:', err);
+          });
+        }
+      }, 100);
+    }
+  };
 
   return (
     <div className="app-container">
@@ -54,6 +109,7 @@ function App() {
           <a href="#about">About</a>
           <a href="#experience">Experience</a>
           <a href="#skills">Skills</a>
+          <a href="#resume" onClick={(e) => { e.preventDefault(); handleResumeClick(); }}>Resume</a>
           <a href="#contact">Contact</a>
         </div>
         <a href="#contact" className="nav-cta hidden-mobile">Let's Talk</a>
@@ -195,6 +251,82 @@ function App() {
         </RevealSection>
       </section>
 
+      {/* Resume Section */}
+      <section id="resume" className="section-padding container">
+        <RevealSection>
+          <h2 className="section-title">Resume</h2>
+          <div className="resume-container">
+            <div className="resume-preview" onClick={handleResumeClick}>
+              <div className="resume-preview-overlay">
+                <Download size={24} />
+                <span>{isDesktop ? 'Click to view full resume' : 'Tap to view full resume'}</span>
+              </div>
+              <div className="resume-thumbnail-custom">
+                <div className="resume-paper">
+                  <div className="resume-header">
+                    <h4 className="resume-name">RISHABH SRIVASTAVA</h4>
+                    <p className="resume-contact">B.Tech Student | IT Enthusiast | LPU</p>
+                    <p className="resume-email">📧 Masterrishabh369@gmail.com</p>
+                  </div>
+                  
+                  <div className="resume-section">
+                    <div className="section-title">ABOUT</div>
+                    <div className="section-text">
+                      Passionate IT professional with expertise in technical implementation and marketing strategies.
+                    </div>
+                  </div>
+                  
+                  <div className="resume-section">
+                    <div className="section-title">EXPERIENCE</div>
+                    <div className="section-text">
+                      <strong>Marketing Head</strong> @ Zynkly
+                    </div>
+                  </div>
+                  
+                  <div className="resume-section">
+                    <div className="section-title">SKILLS</div>
+                    <div className="skills-mini">
+                      <span className="skill-pill-mini">HTML</span>
+                      <span className="skill-pill-mini">Java</span>
+                      <span className="skill-pill-mini">Python</span>
+                      <span className="skill-pill-mini">Cyber Security</span>
+                    </div>
+                  </div>
+                  
+                  <div className="resume-section">
+                    <div className="section-title">EDUCATION</div>
+                    <div className="section-text">
+                      B.Tech IT at Lovely Professional University
+                    </div>
+                  </div>
+                  
+                  <div className="click-indicator">
+                    <Download size={24} />
+                    <span>Click to View Full Resume</span>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Centered Bold Capital Text Overlay */}
+              <div className="centered-click-text">
+                <span className="click-text-main">CLICK TO</span>
+                <span className="click-text-outline">OPEN</span>
+              </div>
+            </div>
+            <div className="resume-info">
+              <h3>My Professional Journey</h3>
+              <p>{isDesktop ? 'Click on the resume preview to view my complete professional background in full-screen mode. You can also download it for future reference.' : 'Tap the resume preview to view my complete professional background. You can also download it for future reference.'}</p>
+              <button 
+                className="btn-primary" 
+                onClick={handleResumeClick}
+              >
+                View Full Resume <ArrowRight size={20} />
+              </button>
+            </div>
+          </div>
+        </RevealSection>
+      </section>
+
       {/* Contact Section Minimal */}
       <section id="contact" className="section-padding footer-section">
         <div className="container">
@@ -221,6 +353,54 @@ function App() {
           </RevealSection>
         </div>
       </section>
+
+      {/* Resume Modal */}
+      {isResumeModalOpen && (
+        <motion.div 
+          className="resume-modal-overlay"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={() => setIsResumeModalOpen(false)}
+        >
+          <motion.div 
+            className="resume-modal-content"
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.8, opacity: 0 }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="resume-modal-header">
+              <h3>My Resume</h3>
+              <button 
+                className="modal-close-btn"
+                onClick={() => setIsResumeModalOpen(false)}
+              >
+                <X size={24} />
+              </button>
+            </div>
+            <div className="resume-modal-body">
+              <iframe
+                src="/rishabh_srivastav_resume.pdf#view=FitH"
+                className="resume-iframe"
+                title="Resume"
+                width="100%"
+                height="100%"
+              />
+            </div>
+            <div className="resume-modal-footer">
+              <a 
+                href="/rishabh_srivastav_resume.pdf" 
+                download="rishabh_srivastav_resume.pdf"
+                className="btn-primary"
+              >
+                <Download size={20} />
+                Download Resume
+              </a>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
     </div>
   );
 }

@@ -1,0 +1,127 @@
+<svg width="400" height="600" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="paper" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f8f9fa;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dx="0" dy="2" result="offsetblur"/>
+      <feFlood flood-color="#000000" flood-opacity="0.2"/>
+      <feComposite in2="offsetblur" operator="in"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background Card -->
+  <rect width="400" height="600" fill="url(#bg)" stroke="#8a2be2" stroke-width="2" rx="16"/>
+  
+  <!-- Resume Paper -->
+  <g filter="url(#shadow)">
+    <rect x="30" y="40" width="340" height="520" fill="url(#paper)" rx="8"/>
+  </g>
+  
+  <!-- Header Section -->
+  <g transform="translate(50, 60)">
+    <!-- Name -->
+    <text x="0" y="0" font-family="Georgia, serif" font-size="28" font-weight="bold" fill="#2c3e50">RISHABH SRIVASTAVA</text>
+    <line x1="0" y1="8" x2="300" y2="8" stroke="#8a2be2" stroke-width="2"/>
+    
+    <!-- Contact Info -->
+    <text x="0" y="25" font-family="Arial, sans-serif" font-size="11" fill="#666">B.Tech Student | IT Enthusiast | Lovely Professional University</text>
+    <text x="0" y="40" font-family="Arial, sans-serif" font-size="10" fill="#8a2be2">📧 Masterrishabh369@gmail.com | 📱 +91 XXXXXXXXXX | 📍 Punjab, India</text>
+  </g>
+  
+  <!-- Section: About -->
+  <g transform="translate(50, 120)">
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2c3e50">ABOUT</text>
+    <line x1="0" y1="5" x2="40" y2="5" stroke="#8a2be2" stroke-width="1"/>
+    
+    <text x="0" y="20" font-family="Arial, sans-serif" font-size="9" fill="#555">
+      Currently pursuing B.Tech at Lovely Professional University. Passionate IT professional
+    </text>
+    <text x="0" y="32" font-family="Arial, sans-serif" font-size="9" fill="#555">
+      with expertise in bridging technical implementation and creative marketing strategies.
+    </text>
+    <text x="0" y="44" font-family="Arial, sans-serif" font-size="9" fill="#555">
+      Skilled in problem-solving and thriving in dynamic environments.
+    </text>
+  </g>
+  
+  <!-- Section: Experience -->
+  <g transform="translate(50, 180)">
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2c3e50">EXPERIENCE</text>
+    <line x1="0" y1="5" x2="70" y2="5" stroke="#8a2be2" stroke-width="1"/>
+    
+    <!-- Job 1 -->
+    <text x="0" y="20" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#2c3e50">Marketing Head</text>
+    <text x="0" y="32" font-family="Arial, sans-serif" font-size="10" fill="#8a2be2" font-weight="600">Zynkly</text>
+    <text x="0" y="44" font-family="Arial, sans-serif" font-size="9" fill="#555">
+      • Spearheading marketing campaigns and digital outreach strategies
+    </text>
+    <text x="0" y="56" font-family="Arial, sans-serif" font-size="9" fill="#555">
+      • Brand growth and audience engagement initiatives
+    </text>
+  </g>
+  
+  <!-- Section: Skills -->
+  <g transform="translate(50, 260)">
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2c3e50">SKILLS</text>
+    <line x1="0" y1="5" x2="45" y2="5" stroke="#8a2be2" stroke-width="1"/>
+    
+    <!-- Skill Tags -->
+    <rect x="0" y="15" width="50" height="18" fill="#8a2be2" opacity="0.1" rx="9"/>
+    <text x="25" y="27" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#8a2be2">HTML</text>
+    
+    <rect x="55" y="15" width="45" height="18" fill="#8a2be2" opacity="0.1" rx="9"/>
+    <text x="77.5" y="27" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#8a2be2">Java</text>
+    
+    <rect x="105" y="15" width="55" height="18" fill="#8a2be2" opacity="0.1" rx="9"/>
+    <text x="132.5" y="27" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#8a2be2">Python</text>
+    
+    <rect x="165" y="15" width="80" height="18" fill="#8a2be2" opacity="0.1" rx="9"/>
+    <text x="205" y="27" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#8a2be2">Cyber Security</text>
+    
+    <rect x="0" y="38" width="60" height="18" fill="#8a2be2" opacity="0.1" rx="9"/>
+    <text x="30" y="50" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#8a2be2">Marketing</text>
+    
+    <rect x="65" y="38" width="70" height="18" fill="#8a2be2" opacity="0.1" rx="9"/>
+    <text x="100" y="50" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#8a2be2">Problem Solving</text>
+  </g>
+  
+  <!-- Section: Education -->
+  <g transform="translate(50, 330)">
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2c3e50">EDUCATION</text>
+    <line x1="0" y1="5" x2="75" y2="5" stroke="#8a2be2" stroke-width="1"/>
+    
+    <text x="0" y="20" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#2c3e50">B.Tech in Information Technology</text>
+    <text x="0" y="32" font-family="Arial, sans-serif" font-size="10" fill="#8a2be2" font-weight="600">Lovely Professional University</text>
+    <text x="0" y="44" font-family="Arial, sans-serif" font-size="9" fill="#666">2021 - 2025 | Expected Graduation</text>
+  </g>
+  
+  <!-- Section: Achievements -->
+  <g transform="translate(50, 390)">
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2c3e50">ACHIEVEMENTS</text>
+    <line x1="0" y1="5" x2="85" y2="5" stroke="#8a2be2" stroke-width="1"/>
+    
+    <text x="0" y="20" font-family="Arial, sans-serif" font-size="10" fill="#555">🏆 IIT Bombay Short Film Competition - 3rd Place Winner</text>
+    <text x="0" y="35" font-family="Arial, sans-serif" font-size="9" fill="#666">Recognized for outstanding creative direction and storytelling</text>
+  </g>
+  
+  <!-- Footer -->
+  <g transform="translate(50, 450)">
+    <line x1="0" y1="0" x2="300" y2="0" stroke="#8a2be2" stroke-width="1"/>
+    <text x="0" y="15" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="#999" x="150">Available for opportunities | Let's connect!</text>
+  </g>
+  
+  <!-- Click Overlay -->
+  <rect x="30" y="40" width="340" height="520" fill="#8a2be2" opacity="0" rx="8">
+    <animate attributeName="opacity" values="0;0.1;0" dur="2s" repeatCount="indefinite"/>
+  </rect>
+  
+  <!-- Click Text -->
+  <text x="200" y="580" font-family="Arial, sans-serif" font-size="16" font-weight="600" text-anchor="middle" fill="#8a2be2">CLICK TO VIEW FULL RESUME</text>
+</svg>
